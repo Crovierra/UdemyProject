@@ -1,0 +1,50 @@
+<%- include("partials/header.ejs", {name: locals.name}) %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-2 bg-light vh-100">
+        </div>
+
+        <!-- Main content -->
+        <div class="col-md-10">
+            <!-- Top Bar -->
+            <div class="row align-items-center mt-3">
+                <!-- Sort By Text -->
+                <div class="col-md-1">
+                    <p class="mb-0">Sort by</p>
+                </div>
+                <!-- Navigation Links -->
+                <div class="col-md-11">
+                    <ul class="nav justify-content-end">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link px-2 text-secondary">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link px-2 text-secondary">Features</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link px-2 text-secondary">Pricing</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Content area -->
+            <div class="row mt-3" id="covers-container">
+                <% if(books && books.length > 0) {%>
+                 <% books.forEach(book => { %>
+                        <div class="col md-3">
+                            <img src="https://covers.openlibrary.org/b/ISBN/<%= book.title %> + /-M">
+                            <a href="/<%= book.title %>"></a>
+                        </div>
+                 <% }) %>
+                 <% } else { %>
+                    <p>No books found.</p>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<%- include("partials/footer.ejs") %>

@@ -1,0 +1,93 @@
+<%- include("partials/header.ejs", {name: locals.name}) %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-2 bg-light vh-100 d-flex flex-column justify-content-center align-items-start">
+            <div class="ms-4">
+            <p><b>Arts</b></p>
+            <a href="#" class="nav-link px-2 text-secondary">Architecture</a>
+            <a href="#" class="nav-link px-2 text-secondary">Art History</a>
+            <a href="#" class="nav-link px-2 text-secondary">Design</a>
+            <a href="#" class="nav-link px-2 text-secondary">Fashion</a>
+            <a href="#" class="nav-link px-2 text-secondary">Film</a>
+            <a href="#" class="nav-link px-2 text-secondary">Graphic Design</a>
+            <a href="#" class="nav-link px-2 text-secondary">Music</a>
+            <a href="#" class="nav-link px-2 text-secondary">etc</a>
+            <br>
+            <p><b>Animals</b></p>
+            <a href="#" class="nav-link px-2 text-secondary">Bears, Cats, Kittens...</a>
+            
+            <br>
+            <p><b>Fiction</b></p>
+            <a href="#" class="nav-link px-2 text-secondary">Fantasy</a>
+            <a href="#" class="nav-link px-2 text-secondary">Horror</a>
+            <a href="#" class="nav-link px-2 text-secondary">Literature</a>
+            <a href="#" class="nav-link px-2 text-secondary">Magic, Mystery...</a>
+            
+        </div>
+        </div>
+
+        <!-- Main content -->
+        <div class="col-md-10">
+            <!-- Top Bar -->
+            <div class="row align-items-center mt-3">
+                <!-- Sort By Text -->
+                <div class="col-md-1">
+                    <p class="mb-0">Sort by</p>
+                </div>
+                <!-- Navigation Links -->
+                <div class="col-md-11">
+                    <ul class="nav justify-content-end">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link px-2 text-secondary">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link px-2 text-secondary">Features</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link px-2 text-secondary">Pricing</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Content area -->
+            <div class="row mt-3" id="covers-container">
+                 
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    // Use axios to fetch covers
+    axios.get('http://localhost:4000/api/covers')
+      .then(response => {
+        const covers = response.data;
+        const container = document.getElementById('covers-container');
+  
+        covers.forEach(cover => {
+          const link = document.createElement('a');
+          link.href = `/${cover.id}`;
+          link.target = "_blank";
+
+          const imgBook = document.createElement('img');
+          imgBook.src = cover.url;
+          imgBook.alt = `Book cover for ${cover.id}`;
+
+          const bookGrid = document.createElement('div');
+          bookGrid.className = `col-3`;
+
+          link.appendChild(imgBook)
+          bookGrid.appendChild(link);
+          container.appendChild(bookGrid);
+
+        });
+      })
+      .catch(error => {
+        console.error('Error loading covers:', error);
+      });
+  </script>
+
+<%- include("partials/footer.ejs") %>

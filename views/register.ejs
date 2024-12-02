@@ -1,0 +1,17 @@
+<%- include("partials/header.ejs") %>
+
+    <div class="container d-flex flex-column justify-content-center align-items-center" style="height: 500px;">
+        <form action="/register" method="POST">
+            <label class="my-2" for="inputUser">Username</label>
+            <input class="px-1" id="inputUser" name="inputUsername" required><br>
+            <label class="my-2" style="padding-left: 4px" for="inputPassword">Password</label>
+            <input class="px-1" type="password" id="inputPassword" name="inputPassword" required><br>
+            <label class="my-2" style="padding-left: 28px" for="inputName">Name</label>
+            <input class="px-1" id="inputName" name="inputName" required><br>
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn brown btn-outline-light me-2">Register</button>
+            </div>
+        </form>
+    </div>
+
+<%- include("partials/footer.ejs") %>
